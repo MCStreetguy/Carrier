@@ -9,6 +9,7 @@ cd $1
 pipeline { /bin/ls }
 forstdin SCRIPT
 foreground {
+  if { /bin/test -f ${SCRIPT} }
   if { /bin/test -x ${SCRIPT} }
   ${SCRIPT}
 }
