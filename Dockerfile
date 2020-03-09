@@ -30,4 +30,10 @@ COPY --from=s6-installer /opt/s6/ /
 # Copy additional files to rootfs
 COPY ./container/ /
 
+# Configuration
+ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=2
+ENV S6_KEEP_ENV=0
+ENV S6_LOGGING=0
+ENV S6_SYNC_DISKS=1
+
 ENTRYPOINT [ "/init" ]
