@@ -1,0 +1,5 @@
+#!/bin/execlineb -S0
+
+/bin/exec -c --
+/bin/s6-envdir -fin -- /etc/environment
+/bin/exec -- $@

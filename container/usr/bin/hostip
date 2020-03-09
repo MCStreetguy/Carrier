@@ -1,0 +1,4 @@
+#!/bin/execlineb -S0
+
+pipeline { /sbin/ip route show default }
+/usr/bin/awk '/default/{print $3}'

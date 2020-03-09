@@ -1,0 +1,6 @@
+#!/bin/execlineb -S0
+
+backtick HOSTIP { /usr/bin/hostip }
+backtick CONTAINERIP { /usr/bin/containerip }
+
+/bin/exec -- $@

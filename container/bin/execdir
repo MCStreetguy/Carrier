@@ -1,0 +1,16 @@
+#!/bin/execlineb -s1
+
+ifelse -n
+{ /bin/test -d $1 }
+{ exit 1 }
+
+cd $1
+
+pipeline { /bin/ls }
+forstdin SCRIPT
+foreground {
+  if { /bin/test -x ${SCRIPT} }
+  ${SCRIPT}
+}
+
+/bin/exec -- $@
