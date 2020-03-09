@@ -3,7 +3,7 @@
 /bin/importas -D /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin PATH PATH
 export PATH ${PATH}
 
-/etc/harbour/defaultenv
-/bin/execdir /etc/harbour/init/
+/etc/carrier/defaultenv
+/bin/execdir /etc/carrier/init/
 
 /etc/s6/init/init-stage1 $@

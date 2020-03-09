@@ -1,4 +1,4 @@
-# MCStreetguy/Harbour – Just another Docker base image
+# MCStreetguy/Carrier – Just another Docker base image
 
 This Docker image is designed to be used as a base for containerized applications.
 It provides a customized init system based upon [`just-containers/s6-overlay`](https://github.com/just-containers/s6-overlay) and some additional utilities for simplified creation of app images.
@@ -8,7 +8,7 @@ It provides a customized init system based upon [`just-containers/s6-overlay`](h
 Just specify the image tag inside your Dockerfile `FROM` directive:
 
 ```Dockerfile
-FROM mcstreetguy/harbour:latest
+FROM mcstreetguy/carrier:latest
 
 # ...
 ```
