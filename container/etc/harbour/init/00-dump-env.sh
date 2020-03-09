@@ -1,7 +1,7 @@
 #!/bin/bash
 
-declare CONTENV_DIR="/etc/environment"
-declare -a _SYSTEM_ENV=(\
+declare -r CONTENV_DIR="/etc/environment"
+declare -ar _SYSTEM_ENV=(\
   "HOME" \
   "HOSTNAME" \
   "PATH" \
@@ -27,6 +27,4 @@ if [ -n "$KEEP_ENV" ]; then
   done
 fi
 
-unset CONTENV_DIR
-unset _SYSTEM_ENV
 exit 0
