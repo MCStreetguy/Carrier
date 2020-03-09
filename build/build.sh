@@ -21,21 +21,21 @@ if [ "$#" -eq 1 ]; then
     declare -r TAG_VERSION="alpine-${ALPINE_VERSION}"
   fi
 
-  echo "[INFO] Building '${TAG_NAME}:${TAG_VERSION}' ..."
-
   if [ "$NOPUBLISH" ]; then
+    echo "[INFO] Building '${TAG_NAME}:${TAG_VERSION}' ..." >&2
     docker build --compress --force-rm --pull --tag "${TAG_NAME}:${TAG_VERSION}" --build-arg "ALPINE_VERSION=${ALPINE_VERSION}" .
   elif [ "$PUSHONLY" ]; then
     docker push "${TAG_NAME}:${TAG_VERSION}"
   else
+    echo "[INFO] Building '${TAG_NAME}:${TAG_VERSION}' ..." >&2
     docker build --compress --force-rm --pull --tag "${TAG_NAME}:${TAG_VERSION}" --build-arg "ALPINE_VERSION=${ALPINE_VERSION}" .
     docker push "${TAG_NAME}:${TAG_VERSION}"
   fi
 
-  echo "Done."
+  echo "Done." >&2
   exit 0
 elif [ "$#" -ne 0 ]; then
-  echo "ERROR! Wrong argument count!"
+  echo "ERROR! Wrong argument count!" >&2
   exit 1
 fi
 
@@ -48,13 +48,13 @@ for ALPINE_VERSION in "${ALPINE_VERSION_TARGETS[@]}"; do
     declare TAG_VERSION="alpine-${ALPINE_VERSION}"
   fi
 
-  echo "[INFO] Building '${TAG_NAME}:${TAG_VERSION}' ..."
-
   if [ "$NOPUBLISH" ]; then
+    echo "[INFO] Building '${TAG_NAME}:${TAG_VERSION}' ..." >&2
     docker build --compress --force-rm --pull --tag "${TAG_NAME}:${TAG_VERSION}" --build-arg "ALPINE_VERSION=${ALPINE_VERSION}" .
   elif [ "$PUSHONLY" ]; then
     docker push "${TAG_NAME}:${TAG_VERSION}"
   else
+    echo "[INFO] Building '${TAG_NAME}:${TAG_VERSION}' ..." >&2
     docker build --compress --force-rm --pull --tag "${TAG_NAME}:${TAG_VERSION}" --build-arg "ALPINE_VERSION=${ALPINE_VERSION}" .
     docker push "${TAG_NAME}:${TAG_VERSION}"
   fi
@@ -62,5 +62,5 @@ for ALPINE_VERSION in "${ALPINE_VERSION_TARGETS[@]}"; do
   unset TAG_VERSION
 done
 
-echo "Done."
+echo "Done." >&2
 exit 0
