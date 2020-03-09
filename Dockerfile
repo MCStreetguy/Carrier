@@ -8,12 +8,13 @@ RUN apk add --no-cache \
       tar \
     && \
     rm -rf /var/cache/apk/* && \
+    mkdir -p /opt/s6 && \
     curl https://keybase.io/justcontainers/key.asc | gpg --import && \
-    curl --output /opt/s6-overlay.tar.gz -L https://github.com/just-containers/s6-overlay/releases/latest/download/s6-overlay-amd64.tar.gz && \
-    curl --output /opt/s6-overlay.tar.gz.sig -L https://github.com/just-containers/s6-overlay/releases/latest/download/s6-overlay-amd64.tar.gz.sig && \
-    gpg --verify /opt/s6-overlay.tar.gz.sig /opt/s6-overlay.tar.gz && \
-    mkdir /opt/s6 && \
-    tar xvzf /opt/s6-overlay.tar.gz -C /opt/s6
+    curl --output /opt/s6/s6-overlay.tar.gz -L https://github.com/just-containers/s6-overlay/releases/latest/download/s6-overlay-amd64.tar.gz && \
+    curl --output /opt/s6/s6-overlay.tar.gz.sig -L https://github.com/just-containers/s6-overlay/releases/latest/download/s6-overlay-amd64.tar.gz.sig && \
+    gpg --verify /opt/s6/s6-overlay.tar.gz.sig /opt/s6/s6-overlay.tar.gz && \
+    tar xvzf /opt/s6-overlay.tar.gz -C /opt/s6 && \
+    rm -rf /opt/s6/s6-overlay.tar.gz.sig /opt/s6/s6-overlay.tar.gz
 
 FROM alpine:${ALPINE_VERSION}
 
