@@ -22,6 +22,14 @@ You may choose from the following available tags, to restrict the used Alpine ve
 | `alpine-3.10` | The latest available version, based upon Alpine Linux 3.10. |
 | `alpine-3.9` | The latest available version, based upon Alpine Linux 3.9. |
 | `alpine-3.8` | The latest available version, based upon Alpine Linux 3.8. |
+| `alpine-3.7` * | The latest available version, based upon Alpine Linux 3.7. |
+| `alpine-3.6` * | The latest available version, based upon Alpine Linux 3.6. |
+| `alpine-3.5` * | The latest available version, based upon Alpine Linux 3.5. |
+| `alpine-3.4` * | The latest available version, based upon Alpine Linux 3.4. |
+| `alpine-3.3` * | The latest available version, based upon Alpine Linux 3.3. |
+| `alpine-3.2` * | The latest available version, based upon Alpine Linux 3.2. |
+
+_(* this version of alpine is no longer maintained, you should upgrade soon!)_
 
 As the image mainly relies on [`just-containers/s6-overlay`](https://github.com/just-containers/s6-overlay), their usage instructions apply here too.
 

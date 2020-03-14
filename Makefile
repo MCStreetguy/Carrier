@@ -5,7 +5,7 @@ $(eval $(BUILD_ARGS):;@:)
 default: all
 
 all:
-	@make build && make publish
+	@./build/build.sh
 
 build:
 	@./build/build.sh --no-publish ${BUILD_ARGS}

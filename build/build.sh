@@ -39,7 +39,7 @@ elif [ "$#" -ne 0 ]; then
   exit 1
 fi
 
-declare -ar ALPINE_VERSION_TARGETS=( "3.8" "3.9" "3.10" "3.11" "latest" )
+declare -ar ALPINE_VERSION_TARGETS=( "3.2" "3.3" "3.4" "3.5" "3.6" "3.7" "3.8" "3.9" "3.10" "3.11" "latest" )
 
 for ALPINE_VERSION in "${ALPINE_VERSION_TARGETS[@]}"; do
   if [ "$ALPINE_VERSION" == "latest" ]; then
