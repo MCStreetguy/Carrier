@@ -1,5 +1,5 @@
 #!/bin/execlineb -S0
 
 pipeline { /sbin/ifconfig eth0 }
-pipeline { /usr/bin/awk '/inet addr/ {print $2}' }
-/usr/bin/awk -F: '/addr/ {print $2}'
+pipeline { /usr/bin/awk "/inet addr/{print $2}" }
+/usr/bin/awk -F: "/addr/{print $2}"
