@@ -186,6 +186,7 @@ The following packages are preinstalled in their latest available version in the
 
 - [`bash`](https://pkgs.alpinelinux.org/package/edge/main/x86_64/bash)
 - [`coreutils`](https://pkgs.alpinelinux.org/package/edge/main/x86_64/coreutils)
+- [`netcat-openbsd`](https://pkgs.alpinelinux.org/package/edge/main/x86_64/netcat-openbsd)
 
 ### Preinstalled Software / Libraries
 
