@@ -257,6 +257,19 @@ $ hostip
 172.21.0.1
 ```
 
+#### `/usr/bin/untilcon`
+
+Wait until a specific connection can be established successfully.
+The script exits 0 if the connection could be established, 1 if the limit of retries is exceeded or 2 on any unexpected failure.
+Invalid or missing arguments cause the script to exit with code 127.
+
+```shell
+$ /usr/bin/untilcon host port (max_retries=60) (interval=3)
+...
+$ /usr/bin/untilcon db 3306
+...
+```
+
 ### Environment
 
 In the early init stage some default environment variables are written to the system.
