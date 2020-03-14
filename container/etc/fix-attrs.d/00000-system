@@ -1,0 +1,5 @@
+/bin true root 0755 0755
+/sbin true root 0740 0740
+/usr/bin true root 0755 0755
+/usr/sbin true root 0740 0740
+/usr/local/bin true root 0755 0755
