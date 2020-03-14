@@ -1,7 +1,7 @@
 #!/bin/execlineb -s1
 
 ifelse -n
-{ /bin/test -d $1 }
+{ /usr/bin/test -d $1 }
 { exit 1 }
 
 cd $1
@@ -9,8 +9,8 @@ cd $1
 pipeline { /bin/ls }
 forstdin SCRIPT
 foreground {
-  if { /bin/test -f ${SCRIPT} }
-  if { /bin/test -x ${SCRIPT} }
+  if { /usr/bin/test -f ${SCRIPT} }
+  if { /usr/bin/test -x ${SCRIPT} }
   ${SCRIPT}
 }
 
