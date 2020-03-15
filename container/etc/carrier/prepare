@@ -1,11 +1,11 @@
 #!/bin/execlineb -S0
 
-if { mkdir -pm 0755 /var/run/carrier }
+if { s6-mkdir -p /var/run/carrier }
 if { s6-rmrf /var/run/carrier/conf.d }
 if { s6-rmrf /var/run/carrier/init }
 if { s6-hiercopy /etc/carrier/conf.d /var/run/carrier/conf.d }
 if { s6-hiercopy /etc/carrier/init /var/run/carrier/init }
-if { chmod 0755 /var/run/carrier/**/* }
+if { chmod -R 0755 /var/run/carrier }
 
 export CARRIER_ROOT /var/run/carrier
 
