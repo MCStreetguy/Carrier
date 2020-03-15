@@ -31,7 +31,7 @@ else
 fi
 
 trap 'exit 2' ERR
-let 'RETRIES=0'
+declare RETRIES=0
 
 until nc -z -v -w30 "$1" "$2"; do
   [[ "$RETRIES" -gt "$MAX_RETRIES" ]] && exit 1
