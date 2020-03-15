@@ -33,6 +33,32 @@ _(* this version of alpine is no longer maintained, you should upgrade soon!)_
 
 As the image mainly relies on [`just-containers/s6-overlay`](https://github.com/just-containers/s6-overlay), their usage instructions apply here too.
 
+### Wait for external service connections
+
+Most applications require external services such as databases to be ready before continuing with the initialization.
+Carrier is designed to await these connections automatically before running the actual init stages.
+To tell the container for which services to wait you may specify a `services.list` file under `/etc/carrier/conf.d/` according to the following syntax:
+
+```plain
+name host port maxretry interval
+```
+
+`maxretry` and `interval` are optional and will be set automatically if omitted.
+All other values are required to be set, otherwise Carrier will skip the entry to prevent errors.
+`name` is trivial and only present for logging purposes. It can be set to an arbritrary value.
+Additionally you may add comments to the file by starting a line with an `#`.
+
+#### Examples
+
+`/etc/carrier/conf.d/services.list`:
+
+```plain
+# Web connectivity is required by updater
+Web google.com 80 60 5
+# Database needs to be ready for migrations
+Database db 3306 60 3
+```
+
 ### Fix ownership and permissions
 
 You may provide text files inside `/etc/fix-attrs.d`, containing instructions for setting file permissions.
@@ -256,19 +282,6 @@ Get the internal IP address of the host, running the Docker daemon.
 ```shell
 $ hostip
 172.21.0.1
-```
-
-#### `/usr/bin/untilcon`
-
-Wait until a specific connection can be established successfully.
-The script exits 0 if the connection could be established, 1 if the limit of retries is exceeded or 2 on any unexpected failure.
-Invalid or missing arguments cause the script to exit with code 127.
-
-```shell
-$ /usr/bin/untilcon host port (max_retries=60) (interval=3)
-...
-$ /usr/bin/untilcon db 3306
-...
 ```
 
 ### Environment

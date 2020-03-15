@@ -3,4 +3,4 @@
 backtick HOSTIP { /usr/bin/hostip }
 backtick CONTAINERIP { /usr/bin/containerip }
 
-/bin/exec -- $@
+exec -- $@

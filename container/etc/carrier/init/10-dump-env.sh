@@ -10,7 +10,7 @@ declare -ar _SYSTEM_ENV=(\
 )
 
 if [ ! -d "$CONTENV_DIR" ]; then
-  mkdir -p "$CONTENV_DIR"
+  s6-mkdir -p "$CONTENV_DIR"
 fi
 
 for ENV in "${_SYSTEM_ENV[@]}"; do

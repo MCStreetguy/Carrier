@@ -32,6 +32,9 @@ COPY --from=s6-installer /opt/s6/ /
 # Copy additional files to rootfs
 COPY ./container/ /
 
+# Set up remaining skeleton
+RUN s6-mkdir -pm 0755 /etc/carrier/conf.d
+
 # Configuration
 ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=2
 ENV S6_KEEP_ENV=0

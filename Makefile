@@ -17,4 +17,4 @@ fix-permissions:
 	@chmod +x container/bin/*
 	@chmod +x container/usr/bin/*
 	@chmod +x container/etc/carrier/defaultenv
-	@chmod +x container/etc/carrier/init/*
+	@chmod +x container/etc/carrier/prepare
