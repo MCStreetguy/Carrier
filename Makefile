@@ -1,7 +1,7 @@
 BUILD_ARGS := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
 $(eval $(BUILD_ARGS):;@:)
 
-.PHONY: all build publish fix-permissions
+.PHONY: default all build publish test fix-permissions
 default: all
 
 all: fix-permissions
@@ -12,6 +12,9 @@ build: fix-permissions
 
 publish:
 	@./build/build.sh --push-only ${BUILD_ARGS}
+
+test:
+	@./build/build.sh --no-publish latest && docker run -it mcstreetguy/carrier:latest /bin/bash -it
 
 fix-permissions:
 	@chmod +x container/bin/*

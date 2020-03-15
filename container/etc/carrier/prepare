@@ -7,6 +7,4 @@ if { s6-hiercopy /etc/carrier/conf.d /var/run/carrier/conf.d }
 if { s6-hiercopy /etc/carrier/init /var/run/carrier/init }
 if { chmod -R 0755 /var/run/carrier }
 
-export CARRIER_ROOT /var/run/carrier
-
 exec -- $@

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-declare -r SERVICE_LIST_FILE="${CARRIER_ROOT}/conf.d/services.list"
+declare -r SERVICE_LIST_FILE="/var/run/carrier/conf.d/services.list"
 
 if [ ! -f "$SERVICE_LIST_FILE" ]; then
   exit 0

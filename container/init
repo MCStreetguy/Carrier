@@ -5,6 +5,6 @@ export PATH ${PATH}
 
 /etc/carrier/defaultenv
 /etc/carrier/prepare
-/bin/execdir $CARRIER_ROOT/init/
+/bin/execdir /var/run/carrier/init/
 
 /etc/s6/init/init-stage1 $@
