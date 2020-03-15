@@ -14,7 +14,7 @@ fi
 
 log () { echo "[carrier] $@" }
 
-echo "$SERVICE_LIST" | while read -r line; do
+eval echo "$SERVICE_LIST" | while read -r line; do
   SERVICE_NAME="$(echo "$line" | cut -d ' ' -f 1 -)"
   SERVICE_HOST="$(echo "$line" | cut -d ' ' -f 2 -)"
   SERVICE_PORT="$(echo "$line" | cut -d ' ' -f 3 -)"
