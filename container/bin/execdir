@@ -1,16 +1,16 @@
-#!/bin/execlineb -S0
+#!/bin/execlineb -s1
 
 ifelse -n
 { /usr/bin/test -d $1 }
 { exit 1 }
 
-cd $1
-
-pipeline { ls }
+pipeline { s6-ls -a $1 }
 forstdin SCRIPT
 foreground {
-  if { /usr/bin/test -f ${SCRIPT} }
-  exec ${SCRIPT}
+  importas -u SCRIPT SCRIPT
+  if { /usr/bin/test -f $SCRIPT }
+  if { /usr/bin/test -x $SCRIPT }
+  exec $SCRIPT
 }
 
 exec -- $@

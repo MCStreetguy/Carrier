@@ -13,7 +13,7 @@ build: fix-permissions
 publish:
 	@./build/build.sh --push-only ${BUILD_ARGS}
 
-test:
+test: fix-permissions
 	@./build/build.sh --no-publish latest && docker run -it mcstreetguy/carrier:latest /bin/bash -it
 
 fix-permissions:
