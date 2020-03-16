@@ -2,19 +2,13 @@
 
 declare -r SERVICE_LIST_FILE="/var/run/carrier/conf.d/services.list"
 
-if [ ! -f "$SERVICE_LIST_FILE" ]; then
+if [ ! -f "$SERVICE_LIST_FILE" ] || [ -z "$(cat $SERVICE_LIST_FILE)" ]; then
   exit 0
 fi
 
-declare -r SERVICE_LIST="$(grep -v '^#' "$SERVICE_LIST_FILE")"
+log () { echo "[carrier] $@"; }
 
-if [ -z "$SERVICE_LIST" ]; then
-  exit 0
-fi
-
-log () { echo "[carrier] $@" }
-
-eval echo "$SERVICE_LIST" | while read -r line; do
+while read -r line; do
   SERVICE_NAME="$(echo "$line" | cut -d ' ' -f 1 -)"
   SERVICE_HOST="$(echo "$line" | cut -d ' ' -f 2 -)"
   SERVICE_PORT="$(echo "$line" | cut -d ' ' -f 3 -)"
@@ -47,6 +41,6 @@ eval echo "$SERVICE_LIST" | while read -r line; do
   done
 
   log "connection to service '${SERVICE_NAME}' at '${SERVICE_HOST}:${SERVICE_PORT}' succeeded."
-done
+done < "$SERVICE_LIST_FILE"
 
 exit 0

@@ -1,4 +1,4 @@
-#!/bin/execlineb -s1
+#!/bin/execlineb -S0
 
 ifelse -n
 { /usr/bin/test -d $1 }
@@ -6,12 +6,11 @@ ifelse -n
 
 cd $1
 
-pipeline { /bin/ls }
+pipeline { ls }
 forstdin SCRIPT
 foreground {
   if { /usr/bin/test -f ${SCRIPT} }
-  if { /usr/bin/test -x ${SCRIPT} }
-  ${SCRIPT}
+  exec ${SCRIPT}
 }
 
-/bin/exec -- $@
+exec -- $@

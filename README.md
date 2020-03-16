@@ -45,8 +45,7 @@ name host port maxretry interval
 
 `maxretry` and `interval` are optional and will be set automatically if omitted.
 All other values are required to be set, otherwise Carrier will skip the entry to prevent errors.
-`name` is trivial and only present for logging purposes. It can be set to an arbritrary value.
-Additionally you may add comments to the file by starting a line with an `#`.
+`name` is trivial and only present for logging purposes.
 
 #### Examples
 
