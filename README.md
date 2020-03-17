@@ -47,6 +47,9 @@ name host port maxretry interval
 All other values are required to be set, otherwise Carrier will skip the entry to prevent errors.
 `name` is trivial and only present for logging purposes.
 
+You may use environment variables in this file in the format of `$ENV_VAR`, just like in bash. (but don't wrap it in braces!)
+The variable will be substituted with the according value if available. Otherwise the line will be skipped with a warning message.
+
 #### Examples
 
 `/etc/carrier/conf.d/services.list`:
