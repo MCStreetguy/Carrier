@@ -1,15 +1,12 @@
 #!/bin/execlineb -s1
 
-ifelse -n { /usr/bin/test -d ${1} } { exit 1 }
-
-if {
-  pipeline { s6-ls -0 -a -- ${1} }
+ifelse { /usr/bin/test -d ${1} } {
+  pipeline { s6-ls -0 -- ${1} }
   pipeline { s6-sort -0 -- }
   forstdin -o 0 -0 -- SCRIPT
   importas -u SCRIPT SCRIPT
   exec ${1}/${SCRIPT}
-  importas -u ? ?
-  exit ${?}
+  exit 0
 }
 
 exec -- $@

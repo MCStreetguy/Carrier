@@ -1,5 +1,6 @@
 #!/bin/execlineb -S0
 
+if { s6-echo "[carrier] preparing container environment..." }
 backtick HOSTIP { /usr/bin/hostip }
 backtick CONTAINERIP { /usr/bin/containerip }
 

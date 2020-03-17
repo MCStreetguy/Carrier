@@ -1,5 +1,6 @@
 #!/bin/execlineb -S0
 
+if { s6-echo "[carrier] making startup files available at /var/run/carrier..." }
 if { s6-mkdir -p /var/run/carrier }
 if { s6-rmrf /var/run/carrier/conf.d }
 if { s6-rmrf /var/run/carrier/init }

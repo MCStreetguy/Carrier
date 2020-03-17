@@ -5,6 +5,11 @@ export PATH ${PATH}
 
 /etc/carrier/defaultenv
 /etc/carrier/prepare
-/bin/execdir /var/run/carrier/init/
+
+foreground {
+  if { s6-echo "[carrier] executing startup scripts..." }
+  /bin/execdir /var/run/carrier/init/
+  s6-echo "[carrier] done."
+}
 
 /etc/s6/init/init-stage1 $@
