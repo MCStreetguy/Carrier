@@ -70,7 +70,7 @@ while read -r line; do
       exit 1
     fi
 
-    log "service not ready yet, retrying in $INTERVAL seconds..."
+    log "'${SERVICE_NAME}' not ready yet, retrying in $INTERVAL seconds..."
 
     let 'RETRIES=RETRIES+1'
     sleep $INTERVAL
