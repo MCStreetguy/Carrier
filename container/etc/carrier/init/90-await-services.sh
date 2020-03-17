@@ -8,7 +8,7 @@ fi
 
 log () { s6-echo "[await-services] $@"; }
 
-while read -r line; do
+while IFS= read -r line || [ -n "$LINE" ]; do
   if [ -z "$line" ]; then continue; fi
 
   SERVICE_NAME="$(echo "$line" | cut -d ' ' -f 1 -)"
