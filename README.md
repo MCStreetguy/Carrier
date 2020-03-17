@@ -59,6 +59,8 @@ The variable will be substituted with the according value if available. Otherwis
 Web google.com 80 60 5
 # Database needs to be ready for migrations
 Database db 3306 60 3
+# Some dynamic service
+Dynamic $HOST $PORT 10 10
 ```
 
 ### Fix ownership and permissions
