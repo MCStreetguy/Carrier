@@ -55,9 +55,11 @@ while IFS= read -r line || [ -n "$LINE" ]; do
 
   if [ -z "$TIMEOUT" ]; then
     TIMEOUT=60
+  elif [ "$TIMEOUT" == 0 ]; then
+    TIMEOUT=99999
   fi
 
-  if [ -z "$INTERVAL" ]; then
+  if [ -z "$INTERVAL" ] || [ "$INTERVAL" -eq 0 ]; then
     INTERVAL=3
   fi
 
