@@ -26,6 +26,9 @@ RUN apk add --no-cache \
     && \
     rm -rf /var/cache/apk/*
 
+# Set default shell for subsequent RUN instructions
+SHELL [ "/bin/bash", "-c" ]
+
 # Add s6-overlay init system
 COPY --from=s6-installer /opt/s6/ /
 
