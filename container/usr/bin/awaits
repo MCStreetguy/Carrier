@@ -46,4 +46,6 @@ until /usr/bin/nc -z -v -w30 "$SERVICE_HOST" "$SERVICE_PORT" &>/dev/null; do
   sleep $INTERVAL
 done
 
+log "connection to service at '${SERVICE_HOST}:${SERVICE_PORT}' succeeded."
+
 exit 0
