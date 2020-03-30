@@ -1,0 +1,49 @@
+#!/bin/bash
+
+log () { s6-echo "$@" >&2; }
+
+if [ $# -lt 3 ]; then
+  log "USAGE: $0 <HOST> <PORT> [TIMEOUT=60] [INTERVAL=3]"
+  exit 1
+fi
+
+if [ -z "$1" ]; then
+  log "ERROR: Host argument may not be empty!"
+  exit 2
+else
+  SERVICE_HOST="$1"
+fi
+
+if [ -z "$2" ]; then
+  log "ERROR: Port argument may not be empty!"
+  exit 3
+else
+  SERVICE_PORT="$2"
+fi
+
+TIMEOUT="${3:-60}"
+if [ "$TIMEOUT" == 0 ]; then
+  TIMEOUT=99999
+fi
+
+INTERVAL="${4:-3}"
+if [ -z "$INTERVAL" ] || [ "$INTERVAL" -lt 1 ]; then
+  INTERVAL=3
+fi
+
+log "awaiting service at '${SERVICE_HOST}:${SERVICE_PORT}'..."
+
+declare RETRIES=0
+until /usr/bin/nc -z -v -w30 "$SERVICE_HOST" "$SERVICE_PORT" &>/dev/null; do
+  if [[ "$RETRIES" -gt "$TIMEOUT" ]]; then
+    log "timeout exceeded, aborting!"
+    exit 27
+  fi
+  
+  log "service not ready yet, retrying in $INTERVAL seconds..."
+  
+  let 'RETRIES=RETRIES+1'
+  sleep $INTERVAL
+done
+
+exit 0

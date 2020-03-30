@@ -22,6 +22,7 @@ FROM alpine:${ALPINE_VERSION}
 RUN apk add --no-cache \
       bash \
       coreutils \
+      findutils \
       netcat-openbsd \
     && \
     rm -rf /var/cache/apk/*
