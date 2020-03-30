@@ -52,6 +52,9 @@ You can disable the timeout by setting the field to `0`, whereas the interval ma
 You may use environment variables in this file in the format of `$ENV_VAR`, just like in bash. (but don't wrap it in braces!)
 The variable will be substituted with the according value if available. Otherwise the line will be skipped with a warning message.
 
+There may be cases where it is not required or recommended to wait for external services before any other initialization task.
+To give you the ability to manually choose the point in time when the container shall halt until something is reachable, you may just omit providing the `services.list` file (or just omit single services from it) and then use the [`/usr/bin/awaits` binary](#usrbinawaits) in an [initialization task script](#execute-initialization-tasks).
+
 #### Examples
 
 `/etc/carrier/conf.d/services.list`:
@@ -277,7 +280,7 @@ Only variables defined in the `KEEP_ENV` environment variable (excluding itself)
 Get the internal IP address of the container.
 
 ```shell
-$ /usr/bin/hostip
+$ /usr/bin/containerip
 172.21.0.1
 ```
 
@@ -286,8 +289,20 @@ $ /usr/bin/hostip
 Get the internal IP address of the host, running the Docker daemon.
 
 ```shell
-$ hostip
+$ /usr/bin/hostip
 172.21.0.1
+```
+
+#### `/usr/bin/awaits`
+
+Wait for a given service to be reachable, then exit. This is actually the same functionality as described in ['Wait for external service connections'](#wait-for-external-service-connections) but provided solely to give you the ability of waiting for services whenever this suits your setup best, and not always at the very beginning of the startup process.
+
+```shell
+$ /usr/bin/awaits google.com 80 60 5
+awaiting service at 'google.com:80'...
+service not ready yet, retrying in 3 seconds...
+# ...
+connection to service at 'google.com:80' succeeded.
 ```
 
 ### Environment
