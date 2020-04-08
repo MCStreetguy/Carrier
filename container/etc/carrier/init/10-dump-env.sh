@@ -2,7 +2,7 @@
 
 s6-echo "[carrier-init] dumping container environment..."
 
-declare -r CONTENV_DIR="/etc/environment"
+declare -r CONTENV_DIR="/var/run/carrier/environment"
 declare -ar _SYSTEM_ENV=(\
   "HOME" \
   "HOSTNAME" \

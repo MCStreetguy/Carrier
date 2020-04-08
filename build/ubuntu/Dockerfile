@@ -4,6 +4,7 @@ FROM ubuntu:${UBUNTU_VERSION} as s6-installer
 # Install s6-overlay init system
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
+      ca-certificates \
       curl \
       gnupg \
       tar \
@@ -23,10 +24,13 @@ FROM ubuntu:${UBUNTU_VERSION}
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
       bash \
+      ca-certificates \
       coreutils \
       findutils \
+      iproute2 \
       netcat-openbsd \
     && \
+    apt-get upgrade -y --with-new-pkgs --no-install-recommends && \
     rm -rf /var/lib/apt/lists/*
 
 # Set default shell for subsequent RUN instructions

@@ -183,25 +183,6 @@ _(see also [https://github.com/just-containers/s6-overlay#dropping-privileges](h
 The image is based fully upon Alpine Linux to be as small and fast as possible.  
 If you are not familiar with Alpine you can find some guides to get you started [in the official wiki](https://wiki.alpinelinux.org/wiki/Tutorials_and_Howtos).
 
-### Preinstalled Packages
-
-The following packages are preinstalled in their latest available version in the respective Alpine branch.
-
-- [`bash`](https://pkgs.alpinelinux.org/package/edge/main/x86_64/bash)
-- [`coreutils`](https://pkgs.alpinelinux.org/package/edge/main/x86_64/coreutils)
-- [`netcat-openbsd`](https://pkgs.alpinelinux.org/package/edge/main/x86_64/netcat-openbsd)
-
-### Preinstalled Software / Libraries
-
-The following external software or libraries are preinstalled in their latest available version.
-
-- [Skarnet skalibs](https://skarnet.org/software/skalibs/)
-- [Skarnet execline](https://skarnet.org/software/execline/)
-- [Skarnet s6](https://skarnet.org/software/s6/)
-- [Skarnet s6-linux-utils](https://skarnet.org/software/s6-linux-utils/)
-- [Skarnet s6-linux-init](https://skarnet.org/software/s6-linux-init/)
-- [`just-containers/s6-overlay`](https://github.com/just-containers/s6-overlay)
-
 ### Init Stages
 
 See the [respective section in the `README` of `just-containers/s6-overlay`](https://github.com/just-containers/s6-overlay#init-stages) for detailled information about the init stages.
