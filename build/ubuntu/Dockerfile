@@ -23,6 +23,7 @@ FROM ubuntu:${UBUNTU_VERSION}
 # Add some common requirements
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
+      apt-utils \
       bash \
       ca-certificates \
       coreutils \
