@@ -3,8 +3,8 @@
 /bin/importas -D /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin PATH PATH
 export PATH ${PATH}
 
-/etc/carrier/defaultenv
-/etc/carrier/prepare
+/etc/carrier/bin/defaultenv
+/etc/carrier/bin/prepare
 
 foreground {
   if { s6-echo "[carrier] executing startup scripts..." }

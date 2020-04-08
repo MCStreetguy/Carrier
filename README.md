@@ -1,7 +1,6 @@
 # MCStreetguy/Carrier – Just another Docker base image
 
 This Docker image is designed to be used as a base for containerized applications.
-It provides a customized init system based upon Alpine Linux, [`just-containers/s6-overlay`](https://github.com/just-containers/s6-overlay) and some additional utilities for simplified creation of app images.
 
 ## Usage
 
@@ -13,11 +12,15 @@ FROM mcstreetguy/carrier:latest
 # ...
 ```
 
-You may choose from the following available tags, to restrict the used Alpine version for more consistency:
+You may choose from the following available tags, to restrict the underlying OS:
 
 | Tag version | Description |
 |:-----------:|:------------|
-| `latest` | The latest available version, based upon the latest stable Alpine Linux. |
+| `latest` | The latest available version, based upon the latest stable Ubuntu. |
+| `ubuntu-18.04` | The latest available version, based upon Ubuntu 18.04 LTS. |
+| `ubuntu-16.04` | The latest available version, based upon Ubuntu 16.04 LTS. |
+| `ubuntu-14.04` | The latest available version, based upon Ubuntu 14.04 LTS. |
+| `alpine-edge` | The latest available version, based upon the latest stable Alpine Linux. |
 | `alpine-3.11` | The latest available version, based upon Alpine Linux 3.11. |
 | `alpine-3.10` | The latest available version, based upon Alpine Linux 3.10. |
 | `alpine-3.9` | The latest available version, based upon Alpine Linux 3.9. |
@@ -32,41 +35,6 @@ You may choose from the following available tags, to restrict the used Alpine ve
 _(* this version of alpine is no longer maintained, you should upgrade soon!)_
 
 As the image mainly relies on [`just-containers/s6-overlay`](https://github.com/just-containers/s6-overlay), their usage instructions apply here too.
-
-### Wait for external service connections
-
-Most applications require external services such as databases to be ready before continuing with the initialization.
-Carrier is designed to await these connections automatically before running the actual init stages.
-To tell the container for which services to wait you may specify a `services.list` file under `/etc/carrier/conf.d/` according to the following syntax:
-
-```plain
-name host port maxretry interval
-```
-
-`maxretry` and `interval` are optional and will be set automatically if omitted.
-All other values are required to be set, otherwise Carrier will skip the entry to prevent errors.
-`name` is trivial and only present for logging purposes.
-
-You can disable the timeout by setting the field to `0`, whereas the interval may not be less than `1`!
-
-You may use environment variables in this file in the format of `$ENV_VAR`, just like in bash. (but don't wrap it in braces!)
-The variable will be substituted with the according value if available. Otherwise the line will be skipped with a warning message.
-
-There may be cases where it is not required or recommended to wait for external services before any other initialization task.
-To give you the ability to manually choose the point in time when the container shall halt until something is reachable, you may just omit providing the `services.list` file (or just omit single services from it) and then use the [`/usr/bin/awaits` binary](#usrbinawaits) in an [initialization task script](#execute-initialization-tasks).
-
-#### Examples
-
-`/etc/carrier/conf.d/services.list`:
-
-```plain
-# Web connectivity is required by updater
-Web google.com 80 60 5
-# Database needs to be ready for migrations
-Database db 3306 60 3
-# Some dynamic service
-Dynamic $HOST $PORT 10 10
-```
 
 ### Fix ownership and permissions
 
