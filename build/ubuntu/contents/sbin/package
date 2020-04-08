@@ -1,0 +1,48 @@
+#!/bin/bash
+
+export LC_ALL=C.UTF-8
+export DEBIAN_FRONTEND=noninteractive
+
+log () {
+  echo "[pkgd] $@" >&2
+}
+
+print_help () {
+  if [ $# -gt 0 ]; then
+    if [ "$1" == "install" ] || [ "$1" == "remove" ] || [ "$1" == "prevent" ] || [ "$1" == "allow" ]; then
+      log "USAGE: $0 $1 <package>"
+    fi
+  else
+    log "USAGE: $0 <command> <arguments>"
+    log ""
+    log "Available commands:"
+    log "  install    Install a package"
+    log "  remove     Remove/Uninstall a package"
+    log "  prevent    Prevent the installation, update or removal of a package"
+    log "  allow      Re-allow the installation, update or removal of a package"
+  fi
+}
+
+set -e
+
+if [ $# -eq 0 ]; then
+  print_help
+  exit 1
+elif [ "$1" == "install" ]; then
+  apt-get update
+  apt-get install -y --no-install-recommends ${@:2}
+elif [ "$1" == "update" ]; then
+  log "WARN: You should not do updates inside a Docker container! (see http://crosbymichael.com/dockerfile-best-practices-take-2.html for more information)"
+
+  apt-get update
+  apt-get upgrade -y --no-install-recommends ${@:2}
+elif [ "$1" == "remove" ]; then
+  apt-get remove ${@:2}
+elif [ "$1" == "prevent" ]; then
+  apt-mark hold ${@:2}
+elif [ "$1" == "allow" ]; then
+  apt-mark unhold ${@:2}
+fi
+
+rm -rf /var/lib/apt/lists/*
+exit 0
