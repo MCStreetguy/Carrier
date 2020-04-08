@@ -3,11 +3,12 @@ FROM ubuntu:${UBUNTU_VERSION} as s6-installer
 
 # Install s6-overlay init system
 RUN apt-get update && \
-    apt-get install \
+    apt-get install -y --no-install-recommends \
       curl \
       gnupg \
       tar \
     && \
+    rm -rf /var/lib/apt/lists/* && \
     mkdir -p /opt/s6 && \
     curl https://keybase.io/justcontainers/key.asc | gpg --import && \
     curl --output /opt/s6/s6-overlay.tar.gz -L https://github.com/just-containers/s6-overlay/releases/latest/download/s6-overlay-amd64.tar.gz && \
@@ -20,11 +21,13 @@ FROM ubuntu:${UBUNTU_VERSION}
 
 # Add some common requirements
 RUN apt-get update && \
-    apt-get install \
+    apt-get install -y --no-install-recommends \
       bash \
       coreutils \
       findutils \
-      netcat-openbsd
+      netcat-openbsd \
+    && \
+    rm -rf /var/lib/apt/lists/*
 
 # Set default shell for subsequent RUN instructions
 SHELL [ "/bin/bash", "-c" ]
