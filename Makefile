@@ -20,15 +20,12 @@ publish-alpine:
 	@./build/build-alpine.sh --push-only ${BUILD_ARGS}
 
 all-ubuntu: fix-permissions
-	@./build/build-alpine.sh
 	@./build/build-ubuntu.sh
 
 build-ubuntu: fix-permissions
-	@./build/build-alpine.sh --no-publish ${BUILD_ARGS}
 	@./build/build-ubuntu.sh --no-publish ${BUILD_ARGS}
 
 publish-ubuntu:
-	@./build/build-alpine.sh --push-only ${BUILD_ARGS}
 	@./build/build-ubuntu.sh --push-only ${BUILD_ARGS}
 
 test-alpine: fix-permissions
