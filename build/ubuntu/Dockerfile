@@ -27,6 +27,7 @@ RUN apt-get update && \
       bash \
       ca-certificates \
       coreutils \
+      dirmngr \
       findutils \
       iproute2 \
       netcat-openbsd \
