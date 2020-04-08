@@ -30,7 +30,6 @@ RUN apt-get update && \
       iproute2 \
       netcat-openbsd \
     && \
-    apt-get upgrade -y --with-new-pkgs --no-install-recommends && \
     rm -rf /var/lib/apt/lists/*
 
 # Set default shell for subsequent RUN instructions
