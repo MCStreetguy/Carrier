@@ -34,7 +34,7 @@ fi
 log "awaiting service at '${SERVICE_HOST}:${SERVICE_PORT}'..."
 
 declare RETRIES=0
-until /usr/bin/nc -z -v -w30 "$SERVICE_HOST" "$SERVICE_PORT" &>/dev/null; do
+until nc -z -w30 "$SERVICE_HOST" "$SERVICE_PORT" &>/dev/null; do
   if [[ "$RETRIES" -gt "$TIMEOUT" ]]; then
     log "timeout exceeded, aborting!"
     exit 27
