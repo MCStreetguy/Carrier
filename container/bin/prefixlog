@@ -1,0 +1,4 @@
+#!/bin/execlineb -s0
+/bin/withstdinas -n INPUT
+/bin/importas -u INPUT INPUT
+/bin/s6-echo $@ $INPUT
