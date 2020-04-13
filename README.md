@@ -2,14 +2,43 @@
 
 This Docker image is designed to be used as a base for containerized applications.
 
+- [MCStreetguy/Carrier – Just another Docker base image](#mcstreetguycarrier-%e2%80%93-just-another-docker-base-image)
+  - [Usage](#usage)
+    - [Fix ownership and permissions](#fix-ownership-and-permissions)
+      - [Examples](#examples)
+    - [Execute initialization tasks](#execute-initialization-tasks)
+    - [Creating service scripts](#creating-service-scripts)
+    - [Execute finalization tasks](#execute-finalization-tasks)
+    - [Environment variables](#environment-variables)
+      - [Services](#services)
+      - [Inside init or finish scripts](#inside-init-or-finish-scripts)
+    - [Dropping privileges](#dropping-privileges)
+  - [Overview](#overview)
+    - [Init Stages](#init-stages)
+    - [Customizing Behaviour](#customizing-behaviour)
+  - [Reference](#reference)
+    - [Binaries](#binaries)
+      - [`/sbin/package`](#sbinpackage)
+      - [`/bin/deeplog`](#bindeeplog)
+      - [`/bin/mirrorlog`](#binmirrorlog)
+      - [`/bin/deeperr`](#bindeeperr)
+      - [`/bin/mirrorerr`](#binmirrorerr)
+      - [`/bin/prefixlog`](#binprefixlog)
+      - [`/bin/execdir`](#binexecdir)
+      - [`/bin/execenv`](#binexecenv)
+      - [`/usr/bin/containerip`](#usrbincontainerip)
+      - [`/usr/bin/hostip`](#usrbinhostip)
+      - [`/usr/bin/awaits`](#usrbinawaits)
+    - [Environment](#environment)
+      - [`HOSTIP`](#hostip)
+      - [`CONTAINERIP`](#containerip)
+
 ## Usage
 
 Just specify the image tag inside your Dockerfile `FROM` directive:
 
 ```Dockerfile
 FROM mcstreetguy/carrier:latest
-
-# ...
 ```
 
 You may choose from the following available tags, to restrict the underlying OS:
@@ -248,6 +277,22 @@ Arguments do not need to be quoted, but it is advised to do so either way.
 /bin/deeplog "Hello World!"
 ```
 
+You may also pipe output to it directly:
+
+**Bash:**  
+```shell
+some_command_with_output | /bin/deeplog
+```
+
+**Execline:**  
+```shell
+/bin/pipeline { some_command_with_output } /bin/deeplog
+```
+
+#### `/bin/mirrorlog`
+
+Exactly the same as [`deeplog`](#bindeeplog), except that it also outputs to the invoking shell.
+
 #### `/bin/deeperr`
 
 Send output directly to the attached Docker daemon's stderr file descriptor (e.g. the docker-compose container output).  
@@ -256,6 +301,36 @@ Arguments do not need to be quoted, but it is advised to do so either way.
 
 ```shell
 /bin/deeperr "Hello World!"
+```
+
+You may also pipe output to it directly:
+
+**Bash:**  
+```shell
+some_command_with_output | /bin/deeplog
+```
+
+**Execline:**  
+```shell
+/bin/pipeline { some_command_with_output } /bin/deeplog
+```
+
+#### `/bin/mirrorerr`
+
+Exactly the same as [`deeperr`](#bindeeperr), except that it also outputs to the invoking shell.
+
+#### `/bin/prefixlog`
+
+Apply a prefix to pipelined output.
+
+**Bash:**  
+```shell
+some_command_with_output | /bin/prefixlog "My Prefix:"
+```
+
+**Execline:**  
+```shell
+/bin/pipeline { some_command_with_output } /bin/prefixlog "My Prefix:"
 ```
 
 #### `/bin/execdir`
