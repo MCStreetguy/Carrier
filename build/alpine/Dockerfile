@@ -36,6 +36,9 @@ COPY --from=s6-installer /opt/s6/ /
 # Copy additional files to rootfs
 COPY ./container/ /
 
+# Copy OS specific files to rootfs
+COPY ./build/alpine/contents/ /
+
 # Set up remaining skeleton
 RUN s6-mkdir -pm 0755 /etc/carrier/conf.d
 

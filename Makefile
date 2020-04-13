@@ -38,4 +38,5 @@ fix-permissions:
 	chmod +x container/bin/*
 	chmod +x container/usr/bin/*
 	chmod +x container/etc/carrier/bin/*
+	chmod +x build/alpine/contents/sbin/*
 	chmod +x build/ubuntu/contents/sbin/*

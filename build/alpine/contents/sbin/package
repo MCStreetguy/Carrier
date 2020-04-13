@@ -30,20 +30,25 @@ if [ $# -eq 0 ]; then
   print_help
   exit 1
 elif [ "$1" == "install" ]; then
-  apt-get update
-  apt-get install -y --no-install-recommends ${@:2}
+  apk update
+  apk add ${@:2}
 elif [ "$1" == "update" ]; then
   log "WARN: You should not do updates inside a Docker container! (see http://crosbymichael.com/dockerfile-best-practices-take-2.html for more information)"
 
-  apt-get update
-  apt-get upgrade -y --no-install-recommends ${@:2}
+  apk update
+  if [ -z "${@:2}" ]; then
+    apk upgrade
+  else
+    apk add --upgrade ${@:2}
+  fi
 elif [ "$1" == "remove" ]; then
-  apt-get remove ${@:2}
-elif [ "$1" == "prevent" ]; then
-  apt-mark hold ${@:2}
-elif [ "$1" == "allow" ]; then
-  apt-mark unhold ${@:2}
+  apk del ${@:2}
+elif [ "$1" == "prevent" ] || [ "$1" == "allow" ]; then
+  log "WARN: Package prevention is not available under Alpine Linux! Consider migrating to Ubuntu if you need this functionality."
 fi
 
-rm -rf /var/lib/apt/lists/*
+rm -rf /var/cache/apk/*
+
+unset DEBIAN_FRONTEND
+unset LC_ALL
 exit 0

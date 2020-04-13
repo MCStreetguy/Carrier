@@ -205,6 +205,59 @@ You may set any of the following environmental variables on the container to cus
 
 ### Binaries
 
+#### `/sbin/package`
+
+A wrapper script for the OS-specific package manager (`apk` under Alpine, `apt` under Ubuntu).
+Supports installation, removal, updates and prevention of packages.
+
+> USAGE: /sbin/package <command> <arguments>
+> 
+> Available commands:
+>   install    Install a package
+>   remove     Remove/Uninstall a package
+>   update     Update all or specific packages
+>   prevent    Prevent the installation, update or removal of a package
+>   allow      Re-allow the installation, update or removal of a package
+
+```shell
+# Install a single package
+/sbin/package install nano
+# Install multiple packages at once
+/sbin/package install pkg1 pkg2 pkg3
+# Remove a single package
+/sbin/package remove nano
+# Remove multiple packages at once
+/sbin/package remove pkg1 pkg2 pkg3
+# Update all packages
+/sbin/package update
+# Update only one/some packages
+/sbin/package update pkg1 pkg2
+# Prevent the installation of a package (Ubuntu specific)
+/sbin/package prevent spell
+# Re-allow the installation of a package (Ubuntu specific)
+/sbin/package allow spell
+```
+
+#### `/bin/deeplog`
+
+Send output directly to the attached Docker daemon's stdout file descriptor (e.g. the docker-compose container output).  
+The sent lines are not mirrored to the terminal! See [`mirrorlog`](#binmirrorlog) if you need such behaviour.
+Arguments do not need to be quoted, but it is advised to do so either way.
+
+```shell
+/bin/deeplog "Hello World!"
+```
+
+#### `/bin/deeperr`
+
+Send output directly to the attached Docker daemon's stderr file descriptor (e.g. the docker-compose container output).  
+The sent lines are not mirrored to the terminal! See [`mirrorerr`](#binmirrorerr) if you need such behaviour.
+Arguments do not need to be quoted, but it is advised to do so either way.
+
+```shell
+/bin/deeperr "Hello World!"
+```
+
 #### `/bin/execdir`
 
 Execute each file in a given directory, then exit into another program.  

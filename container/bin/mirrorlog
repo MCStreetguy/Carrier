@@ -1,0 +1,3 @@
+#!/bin/execlineb -s0
+/bin/foreground { /bin/s6-echo $@ }
+/bin/deeplog $@
