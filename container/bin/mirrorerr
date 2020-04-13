@@ -1,6 +1,12 @@
 #!/bin/execlineb -s0
-/bin/foreground {
+/bin/ifelse { /bin/s6-test $# -eq 0 } {
+  /bin/withstdinas INPUT
+  /bin/importas INPUT INPUT
+  /bin/foreground {
+    /bin/fdmove 2 1
+    /bin/s6-echo $INPUT
+  } /bin/deeperr $INPUT
+} /bin/foreground {
   /bin/fdmove 2 1
   /bin/s6-echo $@
-}
-/bin/deeperr $@
+} /bin/deeperr $@

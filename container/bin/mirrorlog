@@ -1,3 +1,10 @@
 #!/bin/execlineb -s0
-/bin/foreground { /bin/s6-echo $@ }
-/bin/deeplog $@
+/bin/ifelse { /bin/s6-test $# -eq 0 } {
+  /bin/withstdinas INPUT
+  /bin/importas INPUT INPUT
+  /bin/foreground {
+    /bin/s6-echo $INPUT
+  } /bin/deeplog $INPUT
+} /bin/foreground {
+  /bin/s6-echo $@
+} /bin/deeplog $@
